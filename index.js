@@ -1,35 +1,39 @@
 const contactsOptions = require("./contacts");
+const yargs = require("yargs");
 
-const contactsAction = async ({ action, id, name, email, phone }) => {
+const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
       const contactsList = await contactsOptions.listContacts();
       return console.log("allContacts", contactsList);
-    case "getById":
+    case "get":
       const oneContact = await contactsOptions.getContactById(id);
       return console.log("oneContact:", oneContact);
-    case "addContact":
+    case "add":
       const newItem = await contactsOptions.addContact({ name, email, phone });
       return console.log("newContact:", newItem);
-    case "deleteContact":
+    case "remove":
       const contactToDelete = await contactsOptions.removeContact(id);
       return console.log("deletedContact:", contactToDelete);
 
     default:
-      console.log("Unknown action");
+      console.warn("\x1B[31m Unknown action type!");
       break;
   }
 };
 
-// contactsAction({ action: "list" });
+const { argv } = yargs(process.argv.slice(2));
+invokeAction(argv);
 
-// contactsAction({ action: "getById", id: "AeHIrLTr6JkxGE6SN-0Rw" });
+// invokeAction({ action: "list" });
 
-// contactsAction({
-//   action: "addContact",
+// invokeAction({ action: "get", id: "AeHIrLTr6JkxGE6SN-0Rw" });
+
+// invokeAction({
+//   action: "add",
 //   name: "Jack",
 //   email: "jack@mail.com",
 //   phone: "5555555",
 // });
 
-contactsAction({ action: "deleteContact", id: "AeHIrLTr6JkxGE6SN-0Rw" });
+// invokeAction({ action: "remove", id: "AeHIrLTr6JkxGE6SN-0Rw" });
