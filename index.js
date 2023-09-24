@@ -24,16 +24,3 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
 
 const { argv } = yargs(process.argv.slice(2));
 invokeAction(argv);
-
-// invokeAction({ action: "list" });
-
-// invokeAction({ action: "get", id: "AeHIrLTr6JkxGE6SN-0Rw" });
-
-// invokeAction({
-//   action: "add",
-//   name: "Jack",
-//   email: "jack@mail.com",
-//   phone: "5555555",
-// });
-
-// invokeAction({ action: "remove", id: "AeHIrLTr6JkxGE6SN-0Rw" });
